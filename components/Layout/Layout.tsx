@@ -1,5 +1,5 @@
 import {useStyles} from "./styles";
-import CustomDrawer from "../Drawer/Drawer";
+import CustomDrawer from "../CustomDrawer/CustomDrawer";
 
 
 export default function Layout({children}: any) {
