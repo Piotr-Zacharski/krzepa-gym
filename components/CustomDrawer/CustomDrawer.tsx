@@ -21,6 +21,10 @@ import CollectionsIcon from "@mui/icons-material/Collections";
 import Image from "next/image";
 import Link from "next/link";
 import { useStyles } from "./styles";
+import {useState} from "react";
+import CustomContactModal from "../CustomContactModal/CustomContactModal";
+import CustomRules from "../CustomRules/CustomRules";
+import CustomTable from "../CustomTable/CustomTable";
 
 const drawerWidth = 230;
 
@@ -29,12 +33,19 @@ const titles = [
   { label: "Galeria", icon: <CollectionsIcon />, path: "/gallery" },
   { label: "Sala cardio", icon: <LocalFireDepartmentIcon />, path: "/cardio" },
   { label: "Sklep", icon: <ShoppingBasketIcon />, path: "/shop" },
-  { label: "Cennik", icon: <AttachMoneyIcon />, path: "/priceList" },
-  { label: "Regulamin", icon: <FormatListNumberedIcon />, path: "/rules" },
-  { label: "Kontakt", icon: <ContactPhoneIcon />, path: "/contact" },
 ];
 
 export default function CustomDrawer() {
+  const [openModal, setOpenModal] = useState(false);
+    const [openRules, setOpenRules] = useState(false);
+    const [openPrice, setOpenPrice] = useState(false);
+
+    const handleOpenPrice = () => setOpenPrice(true);
+    const handleClosePrice = () => setOpenPrice(false);
+    const handleOpenRules = () => setOpenRules(true);
+    const handleCloseRules = () => setOpenRules(false);
+    const handleOpenModal = () => setOpenModal(true);
+    const handleCloseModal = () => setOpenModal(false);
   const styles = useStyles();
   return (
     <Box sx={{ display: "flex", padding: 0, height: 48 }}>
@@ -64,7 +75,14 @@ export default function CustomDrawer() {
             style={{ flexGrow: 1, color: "#0A1929" }}
           >
             Siłownia Krzepa
+              <Typography> <span>ul. Kraszewskiego 8a 22-200 Włodawa woj. Lubelskie</span></Typography>
           </Typography>
+            <Box>
+                <Typography style={{margin: '0 auto', textAlign: 'center', marginBottom: 1, fontWeight: 'bold', color: "#0A1929", fontSize: 14}}>GODZINY OTWARCIA</Typography>
+                <Typography style={{color: "#0A1929", fontSize: 12}}>Poniedziałek - Piątek 10.00 - 21.00</Typography>
+                <Typography style={{color: "#0A1929", fontSize: 12}}>Sobota 10.00 - 19.00</Typography>
+                <Typography style={{color: "#0A1929", fontSize: 12}}>Niedziela nieczynne</Typography>
+            </Box>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -99,6 +117,30 @@ export default function CustomDrawer() {
               </ListItem>
             </Link>
           ))}
+            <ListItem disablePadding>
+                <ListItemButton onClick={handleOpenPrice}>
+                    <ListItemIcon style={{ color: "#FFFFFF" }}>
+                        <AttachMoneyIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Cennik" />
+                </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+                <ListItemButton onClick={handleOpenRules}>
+                    <ListItemIcon style={{ color: "#FFFFFF" }}>
+                        <FormatListNumberedIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Regulamin" />
+                </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+                <ListItemButton onClick={handleOpenModal}>
+                    <ListItemIcon style={{ color: "#FFFFFF" }}>
+                        <ContactPhoneIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Kontakt" />
+                </ListItemButton>
+            </ListItem>
         </List>
         <Divider style={{ backgroundColor: "#FFFFFF" }} />
         <List style={{ margin: "0 auto" }}>
@@ -112,6 +154,9 @@ export default function CustomDrawer() {
       <Box component="main" sx={{ flexGrow: 1, bgcolor: "#34495e" }}>
         <Toolbar />
       </Box>
+        {openModal && <CustomContactModal open={openModal} onClose={handleCloseModal} />}
+        {openRules && <CustomRules open={openRules} onClose={handleCloseRules} />}
+        {openPrice && <CustomTable open={openPrice} onClose={handleClosePrice} />}
     </Box>
   );
 }

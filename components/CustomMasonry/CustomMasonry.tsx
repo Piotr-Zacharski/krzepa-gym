@@ -16,6 +16,8 @@ export default function CustomMasonry() {
               src={`${item.img}?w=162&auto=format`}
               alt={item.title}
               loading="lazy"
+              width={200}
+              height={400}
               style={{
                 borderBottomLeftRadius: 4,
                 borderBottomRightRadius: 4,

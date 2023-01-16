@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import HomeView from '../components/Home/Home';
+import CustomContactModal from "../components/CustomContactModal/CustomContactModal";
+import React from "react";
 
 
 export default function Home() {
@@ -14,6 +16,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <HomeView />
+          <CustomContactModal />
       </main>
     </>
   )

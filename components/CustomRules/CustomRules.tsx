@@ -2,13 +2,36 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import {Box, Modal } from "@mui/material";
 
-export default function CustomRules() {
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '57%',
+  padding: 10,
+  transform: 'translate(-50%, -50%)',
+  width: 900,
+  backgroundColor: '#ecf0f1',
+  border: '1px solid #0A1929',
+  boxShadow: 24,
+  borderRadius: 5,
+  p: 4,
+};
+
+export default function CustomRules({open, onClose}: any) {
   return (
-    <Card sx={{ maxWidth: 900, textAlign: "justify"}}>
+      <div>
+        <Modal
+            open={open}
+            onClose={onClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+    <Card elevation={0} sx={{ maxWidth: 900, textAlign: "justify", backgroundColor: '#ecf0f1'}}>
       <CardContent>
         <Typography
-          sx={{ fontSize: 16, fontWeight: "bold" }}
+          sx={{ fontWeight: 'bold', fontSize: '1.3rem' }}
           color="text.secondary"
           gutterBottom
         >
@@ -92,5 +115,8 @@ export default function CustomRules() {
         </Typography>
       </CardContent>
     </Card>
+          </Box>
+        </Modal>
+      </div>
   );
 }
